@@ -1,0 +1,29 @@
+extends ./layout.jade
+block contenido
+    div(class="panel panel-info top-space")
+        div(class="panel-heading")
+            h4(class="text-center") Registrar Usuario 
+          
+        div(class="col-lg-8 col-md-8 remove-float center-block")
+            div(class="panel-body")
+                form(action="/users" method="POST")
+                    div(class="form-group")
+                        label(for="email") Nombre:
+                        input(type="text", class="form-control" name="name", placeholder="Nombre Completo")
+                    div(class="form-group")
+                        label(for="age") Edad:
+                        input(type="text", class="form-control" name="age", placeholder="Edad")
+                    div(class="form-group")
+                        label(for="email") Email:
+                        input(type="email", class="form-control" name="email", placeholder="email@domain.com")
+                    div(class="form-group")
+                        label(for="username") Nombre de Usuario:
+                        input(type="text", class="form-control" name="username", placeholder="Nombre de Usuario")
+                    div(class="form-group")
+                        label(for="password") Password:
+                        input(type="password", class="form-control" name="password", placeholder="* * * * * * *")
+                    div(class="row")
+                        div(class="col-xs-12 col-sm-6")
+                            input(type="submit" class="btn btn-small btn-primary btn-raised" value="Save")
+                        div(class="col-xs-12 col-sm-6")
+                            a(href="/login" class="right") Ya tengo una cuanta.
