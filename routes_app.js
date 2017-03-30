@@ -3,6 +3,8 @@ var Imagen     = require("./models/imagenes");
 
 var router = express.Router();
 
+var image_finder_middleware =  require("./middlewares/find_image");
+
 router.get("/", function(req, res){
     //Validar Inicio de sesion
     res.render("app/dashboard")
@@ -12,35 +14,36 @@ router.get("/imagenes/new", function(req, res){
     res.render("app/imagenes/new");
 });
 
+router.all("/imagenes/:id*", image_finder_middleware);
+
 router.get("/imagenes/:id/edit", function(req, res){
-    Imagen.findById(req.params.id, function(err, imagen){
-        res.render("app/imagenes/edit", {imagen: imagen});
-    });
+    res.render("app/imagenes/edit");
 });
 
 /* REST */
 
 router.route("/imagenes/:id")
     .get(function(req, res){
-        Imagen.findById(req.params.id, function(err, imagen){
-            res.render("app/imagenes/show", {imagen: imagen});
-        });
+        res.render("app/imagenes/show");
     })
     .put(function(req, res){
-        Imagen.findById(req.params.id, function(err, imagen){
-            imagen.title = req.body.title;
-            imagen.save(function(err){
-                if(!err){
-                    res.render("app/imagenes/show", {imagen: imagen});
-                } else {
-                    res.render("app/imagenes/"+imagen.id+"/edit", {imagen: imagen});
-                }
-            });
+        res.locals.imagen.title = req.body.title;
+        res.locals.imagen.save(function(err){
+            if(!err){
+                res.render("app/imagenes/show");
+            } else {
+                res.render("app/imagenes/"+req.params.id+"/edit");
+            }
         });
     })
     .delete(function(req, res){
-        Imagen.findById(req.params.id, function(err, imagen){
-            
+        Imagen.findOneAndRemove({_id: req.params.id}, function(err){
+            if(!err){
+                res.redirect("/app/imagenes");
+            } else {
+                console.log(err);
+                res.redirect("/app/imagenes"+req.params.id);
+            }
         });
     });
 

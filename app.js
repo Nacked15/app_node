@@ -10,7 +10,9 @@ var session_middleware = require("./middlewares/session");
 var methodOverride     = require("method-override");
 var app        = express();
 
-//--------- M I D L E W A R E S ------------->
+
+//- - - - - - M I D L E W A R E S - - - - - ->
+
 app.use("/public", express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -24,19 +26,19 @@ app.use(CookieSession({
 app.set("view engine", "jade");
 
 
-//-------------- R O U T E S ----------------->
+//- - - - - - - - - R O U T E S - - - - - - ->
 
 //Load index
 app.get("/", function(req, res){
     res.render("index");
 });
 
-//Load login form
+//Redirect to register form
 app.get("/signup", function(req, res){
     res.render("signup");
 });
 
-//login user
+//save user data
 app.post("/users", function(req, res){
     //Crear nuevo usuario pasando los datos obtenidos desde el form
     var user = new User({name:     req.body.name,
@@ -45,13 +47,13 @@ app.post("/users", function(req, res){
                          email:    req.body.email, 
                          password: req.body.password});
 
-    //====== Callbaks ======                  
+    //= = = = = = Callbaks = = = = = =\\                 
     //user.save(function(err, user, rows){
     //    res.send("Status save data: Ok");
     //});
 
 
-    //====== Promises ======
+    //= = = = = = Promises = = = = = =\\
     user.save().then(function(usr){
         res.render("login");
     }, function(erro){
@@ -61,10 +63,12 @@ app.post("/users", function(req, res){
     });
 });
 
+//Redirect to login form
 app.get("/login", function(req, res){
     res.render("login");
 });
 
+//Redirect to Dashboard 
 app.post("/loggedin", function(req, res){
     User.findOne({email: req.body.email, password: req.body.password},
         function(err, user){
