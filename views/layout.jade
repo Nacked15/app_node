@@ -8,11 +8,17 @@ html(lang="en")
 
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
         //link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.min.css")
-        link(rel="stylesheet" href="public/app.css")
+        link(rel="stylesheet" href="/public/app.css")
 
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     body
+        nav(class="black large-padding white-text")
+            ul
+                li
+                    a(href="/app") Inicio
+                li
+                    a(href="/app/imagenes") Mis imagenes
         div(class="container")  
             div(class="row")
-                div(class="col-lg-10 col-md-10 remove-float center-block")
+                div(class="col-lg-10 col-md-10 remove-float center-block ")
                     block contenido

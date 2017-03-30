@@ -17,3 +17,25 @@
 .right {
     float: right;
 }
+
+.large-padding {
+    padding: 10px 15px;
+}
+
+.black {
+    background-color: #222222;
+}
+
+.white-text {
+    color: white;
+}
+
+nav {
+    text-align: right;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 2em;
+    font-size: 1em;
+}

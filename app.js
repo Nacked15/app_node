@@ -3,23 +3,28 @@ var express    = require("express");
 var bodyParser = require("body-parser"); //leer parametros enviados desde un form
 var User       = require("./models/user").User;
 // var session    = require('express-session'); //Env. Production
-var session    = require('cookie-session'); //Env. Development
+var CookieSession    = require('cookie-session'); //Env. Development
 var Imagen     = require("./models/imagenes");
 var router_app = require("./routes_app");
 var session_middleware = require("./middlewares/session");
+var methodOverride     = require("method-override");
 var app        = express();
 
 //--------- M I D L E W A R E S ------------->
 app.use("/public", express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(session({secret: "1a2b3c4d5e6f7g8h9i", resave: false, saveUninitialized: false}))
+app.use(methodOverride("_method"));
+//app.use(session({secret: "1a2b3c4d5e6f7g8h9i", resave: false, saveUninitialized: false}));
+app.use(CookieSession({
+    name: "session",
+    keys: ["llave-1", "llave-2"]
+}));
 
 app.set("view engine", "jade");
 
+
 //-------------- R O U T E S ----------------->
-
-
 
 //Load index
 app.get("/", function(req, res){
@@ -44,6 +49,7 @@ app.post("/users", function(req, res){
     //user.save(function(err, user, rows){
     //    res.send("Status save data: Ok");
     //});
+
 
     //====== Promises ======
     user.save().then(function(usr){

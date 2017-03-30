@@ -1,0 +1,17 @@
+extends ../../layout.jade
+block contenido
+    div(class="row")
+        div(class="col-lg-8 col-md-8 remove-float center-block top-space")
+            h3 Colección
+            table(class="table table-hover")
+                tbody
+                for imagen in imagenes
+                    tr
+                        td= imagen.title
+                        td 
+                            a(href="/app/imagenes/#{imagen._id}/edit" class="btn btn-raised btn-xs btn-success") Editar
+                        td
+                            form(action="/app/imagenes/#{imagen._id}?_method=DELETE")
+                                input(type="submit" class="btn btn-raised btn-xs btn-danger" value="Eliminar")
+
+                
