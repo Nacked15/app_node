@@ -20,7 +20,9 @@ router.get("/imagenes/:id/edit", function(req, res){
     res.render("app/imagenes/edit");
 });
 
-/* REST */
+
+
+/* * * * * * * R E S T * * * * * * */
 
 router.route("/imagenes/:id")
     .get(function(req, res){

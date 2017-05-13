@@ -14,9 +14,10 @@ var app        = express();
 //- - - - - - M I D L E W A R E S - - - - - ->
 
 app.use("/public", express.static('public'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(methodOverride("_method"));
+
 //app.use(session({secret: "1a2b3c4d5e6f7g8h9i", resave: false, saveUninitialized: false}));
 app.use(CookieSession({
     name: "session",
@@ -67,6 +68,11 @@ app.post("/users", function(req, res){
 app.get("/login", function(req, res){
     res.render("login");
 });
+
+//Funciones flecha
+// app.get("/login", (req, res) => {
+//     res.render("login");
+// });
 
 //Redirect to Dashboard 
 app.post("/loggedin", function(req, res){

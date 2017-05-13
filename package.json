@@ -4,10 +4,11 @@
   "description": "routing app",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "luisyama",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
@@ -19,5 +20,8 @@
     "method-override": "^2.3.8",
     "mongoose": "^4.9.0",
     "pug": "^2.0.0-beta11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
